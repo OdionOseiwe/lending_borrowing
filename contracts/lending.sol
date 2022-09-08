@@ -54,7 +54,7 @@ contract Lending_Borrowing{
     mapping(address => UsersDetails) allUserDetails;
 
     /// @param _amountofOthers amount of other tokens to be deposited
-    function depositeEthForStable(uint _amountofOthers) external{
+    function depositeOtherTokenForStable(uint _amountofOthers) external{
         UsersDetails storage _UsersDetails = allUserDetails[msg.sender];
         require(_UsersDetails.deposited == false, "resolve others");
         if(_amountofOthers < 0){
@@ -71,7 +71,7 @@ contract Lending_Borrowing{
     }
 
     /// @param amoutOfStable amount of other tokens to be returned
-    function returnStableForEth(uint amoutOfStable) external{
+    function returnStableForOtherToken(uint amoutOfStable) external{
         UsersDetails storage _UsersDetails = allUserDetails[msg.sender];
         require(_UsersDetails.deposited == true, "didnt deposite");
         if(amoutOfStable < 0){
@@ -90,7 +90,7 @@ contract Lending_Borrowing{
         emit returned(msg.sender, amoutOfStable);
     }
 
-    function depositeOtherEthForStable() payable  external{
+    function depositeEthForStable() payable  external{
         UsersDetails storage _UsersDetails = allUserDetails[msg.sender];
         require(_UsersDetails.deposited == false, "resolve others");
         if(msg.value < 0){
@@ -106,7 +106,7 @@ contract Lending_Borrowing{
     }
     
     /// @param amoutOfStable amount of other tokens to be returned
-    function returnStableForOtherEth(uint amoutOfStable) external{
+    function returnStableForEth(uint amoutOfStable) external{
         UsersDetails storage _UsersDetails = allUserDetails[msg.sender];
         require(_UsersDetails.deposited == true, "didnt deposite");
         if(amoutOfStable < 0){
